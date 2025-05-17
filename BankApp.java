@@ -21,28 +21,28 @@ public class BankApp {
             bank = new CooperativeBank(bankName, branchName);
         }
 
+        
+        System.out.println("Choose account type:\n1. Savings account\n2. Loan account\n3. Current account");
+        int accountType = scn.nextInt();
+        scn.nextLine();
+
+        System.out.println("Enter Holder name");
+        String holderName = scn.nextLine();
+
+        Account account = null;
+
+        if (accountType == 1) {
+            account = new SavingsAccount(holderName);
+        } else if (accountType == 2) {
+            account = new LoanAccount(holderName);
+        } else if (accountType == 3) {
+            account = new CurrentAccount(holderName);
+        }
+
+        bank.openAccount(account);
+        bank.displayBankInfo();
+        account.showAccountType();
         while (true) {
-            System.out.println("Choose account type:\n1. Savings account\n2. Loan account\n3. Current account");
-            int accountType = scn.nextInt();
-            scn.nextLine();
-
-            System.out.println("Enter Holder name");
-            String holderName = scn.nextLine();
-
-            Account account = null;
-
-            if (accountType == 1) {
-                account = new SavingsAccount(holderName);
-            } else if (accountType == 2) {
-                account = new LoanAccount(holderName);
-            } else if (accountType == 3) {
-                account = new CurrentAccount(holderName);
-            }
-
-            bank.openAccount(account);
-            bank.displayBankInfo();
-            account.showAccountType();
-
             if (account instanceof AccountOperations) {
                 AccountOperations ops = (AccountOperations) account;
 
